@@ -4,7 +4,11 @@
   "description": "MEAN test app",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.14.0",
+    "compression": "^1.5.2",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1"
   },
   "devDependencies": {},
   "scripts": {
