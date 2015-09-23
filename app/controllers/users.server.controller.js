@@ -14,7 +14,7 @@ exports.create = function(req, res, next) {
 };
 
 exports.list = function(req, res, next) {
-	User.find({}, 'username lastName email', {skip: 0, limit: 10}, function(err, users) {
+	User.find({}, function(err, users) {
 		if (err) {
 			next(err);
 		} else {
@@ -27,9 +27,9 @@ exports.read = function(req, res, next) {
 	res.json(req.user);
 };
 
-exports.userByID = function(req, res, next, userId) {
+exports.userByID = function(req, res, next, id) {
 	User.findOne({
-		_id: userId
+		_id: id
 	}, function(err, user) {
 		if (err) {
 			next(err);
@@ -39,4 +39,26 @@ exports.userByID = function(req, res, next, userId) {
 		}
 	});
 };
+
+
+exports.update = function(req, res, next) {
+	User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(user);
+		}
+	});
+};
+
+exports.delete = function(req, res, next) {
+	req.user.remove(function(err) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(req.user);
+		}
+	});
+};
+
 
